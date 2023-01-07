@@ -4,40 +4,51 @@ namespace Aircompany.Planes
 {
     public class MilitaryPlane : Plane
     {
-        public MilitaryType _type;
+        private MilitaryPlaneType militaryPlaneType;
 
-        public MilitaryPlane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, MilitaryType type)
-            : base(model, maxSpeed, maxFlightDistance, maxLoadCapacity)
+        public MilitaryPlane(
+            string model,
+            int maxSpeed,
+            int maxFlightDistance,
+            int maxLoadCapacity,
+            MilitaryPlaneType type)
+            : base(
+                  model, 
+                  maxSpeed, 
+                  maxFlightDistance,
+                  maxLoadCapacity)
         {
-            _type = type;
+            this.MilitaryPlaneType = type;
         }
+
+        public MilitaryPlaneType MilitaryPlaneType { get => militaryPlaneType; set => militaryPlaneType = value; }
 
         public override bool Equals(object obj)
         {
-            var plane = obj as MilitaryPlane;
-            return plane != null &&
-                   base.Equals(obj) &&
-                   _type == plane._type;
+            if (obj is MilitaryPlane plane)
+            {
+                return base.Equals(obj) && MilitaryPlaneType == plane.MilitaryPlaneType;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override int GetHashCode()
         {
-            var hashCode = 1701194404;
+            int hashCode = 1701194404;
             hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + _type.GetHashCode();
+            hashCode = hashCode * -1521134295 + MilitaryPlaneType.GetHashCode();
             return hashCode;
         }
 
-        public MilitaryType PlaneTypeIs()
-        {
-            return _type;
-        }
 
 
         public override string ToString()
         {
             return base.ToString().Replace("}",
-                    ", type=" + _type +
+                    ", type=" + MilitaryPlaneType +
                     '}');
         }        
     }
