@@ -27,7 +27,7 @@ namespace Aircompany
 
         public PassengerPlane GetPassengerPlaneWithMaxPassengersCapacity()
         {
-            return GetPassengersPlanes().OrderBy(plane => plane.PassengersCapacityIs()).FirstOrDefault();
+            return GetPassengersPlanes().OrderBy(plane => plane.PassengersCapacity).FirstOrDefault();
         }
 
         public List<MilitaryPlane> GetTransportMilitaryPlanes()
